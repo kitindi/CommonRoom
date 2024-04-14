@@ -1,0 +1,23 @@
+{% extends 'posts/base.html' %} {% block content %}
+<main class="w-full max-w-6xl mx-auto py-8 px-6 md:px-8 lg:px-0">
+  <h1 class="text-xl md:text-lg font-bold text-slate-700">Expolore Topics</h1>
+  <div class="hidden md:block gap-3 md:grid md:grid-cols-12 md:gap-3 mt-5 lg:px-0">
+    <div class="md:col-span-6 lg:col-span-3 bg-gray-200 rounded-lg h-[200px]"></div>
+    <div class="md:col-span-6 lg:col-span-3 bg-gray-200 rounded-lg h-[200px]"></div>
+    <div class="md:col-span-6 lg:col-span-3 bg-gray-200 rounded-lg h-[200px]"></div>
+    <div class="md:col-span-6 lg:col-span-3 bg-gray-200 rounded-lg h-[200px]"></div>
+  </div>
+  <div class="grid grid-cols-12 gap-3 md:hidden mt-4">
+    <div class="col-span-3 bg-gray-100 rounded-md p-2"><h2 class="text-sm font-bold">STEM</h2></div>
+    <div class="col-span-3 bg-gray-100 rounded-md p-2"><h2 class="text-sm font-bold">Artificial Intelligence</h2></div>
+    <div class="col-span-3 bg-gray-100 rounded-md p-2"><h2 class="text-sm font-bold">Computer Science</h2></div>
+    <div class="col-span-3 bg-gray-100 rounded-md p-2"><h2 class="text-sm font-bold">Mathematics</h2></div>
+  </div>
+  <div class="md:grid md:grid-cols-12 pag-3 mt-8">
+    <div class="md:col-span-9"></div>
+    <div class="md:col-span-3 p-2">
+      <h3 class="font-semibold tex-sm text-[16px]">Top Contributors</h3>
+    </div>
+  </div>
+</main>
+{% endblock content %}
