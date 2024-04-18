@@ -60,7 +60,7 @@
             </div>
           </form>
           <a
-            href="#"
+            href="{% url 'ask-question' %}"
             class="hidden md:inline-flex bg-blue-600 px-2 py-3 text-white font-semibold w-full md:w-[200px] rounded-md flex items-center justify-center gap-2"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-white w-6 h-6" color="#9b9b9b" fill="none">
@@ -133,9 +133,10 @@
           </a>
         </div>
       </div>
-      <div class="bg-white rounded-md p-4 mt-6">
+      <div class="mt-6">
         <ul>
-          <li>
+          {% for question in questions %}
+          <li class="bg-white rounded-md p-4 mb-8">
             <div class="grid grid-cols-12">
               <div class="col-span-1 flex justify-center py-2 mr-2">
                 <img
@@ -145,21 +146,18 @@
                 />
               </div>
               <div class="col-span-11 py-2">
-                <h3 class="text-[20px] text-slate-600 font-semibold mb-4">I need help with this math question</h3>
-                <p class="text-slate-600 text-[16px] pb-3 pt-1">
-                  I was trying to solve this Mathematics question, but the diffrerentiation proved challenging to me, can someone help me to figure out or
-                  atleast shere a video tutorial that will help me understand the concepts. Thanks
-                </p>
-                <div class="">
-                  <img
-                    class="object-cover w-full"
-                    src="https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
+                <h3 class="text-[20px] text-slate-600 font-semibold mb-4">{{ question.title }}</h3>
+                <p class="text-slate-600 text-[16px] pb-3 pt-1">{{ question.problem_body }}</p>
+                <div class="{% if question.image %} h-[300px] w-full text-start {% else %} hidden {% endif %}">
+                  {% if question.image %}
+                  <img class="object-contain w-full h-full rounded-md" src="{{ question.image.url }}" alt="" />
+
+                  <p></p>
+                  {% endif %}
                 </div>
                 <div class="py-2 mt-5 flex items-center gap-8">
                   <a href="" class="flex items-center gap-3 text-sm"
-                    ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" color="#9b9b9b" fill="none">
+                    ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-red-600" color="#9b9b9b" fill="none">
                       <path
                         d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z"
                         stroke="currentColor"
@@ -168,8 +166,8 @@
                       /></svg
                     >3 Likes</a
                   >
-                  <a href="" class="flex items-center gap-2 text-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" color="#9b9b9b" fill="none">
+                  <a href="" class="flex items-center gap-2 text-sm font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 text-blue-600" color="#9b9b9b" fill="none">
                       <path
                         d="M16.2141 4.98239L17.6158 3.58063C18.39 2.80646 19.6452 2.80646 20.4194 3.58063C21.1935 4.3548 21.1935 5.60998 20.4194 6.38415L19.0176 7.78591M16.2141 4.98239L10.9802 10.2163C9.93493 11.2616 9.41226 11.7842 9.05637 12.4211C8.70047 13.058 8.3424 14.5619 8 16C9.43809 15.6576 10.942 15.2995 11.5789 14.9436C12.2158 14.5877 12.7384 14.0651 13.7837 13.0198L19.0176 7.78591M16.2141 4.98239L19.0176 7.78591"
                         stroke="currentColor"
@@ -190,6 +188,7 @@
               </div>
             </div>
           </li>
+          {% endfor %}
         </ul>
       </div>
     </div>

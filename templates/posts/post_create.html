@@ -1,0 +1,84 @@
+{% extends 'posts/base.html' %} {% block content %}
+<main class="w-full max-w-6xl mx-auto py-8 px-8 md:px-8 lg:px-0">
+  <div class="flex justify-between items-center md:inline-block">
+    <h1 class="text-xl md:text-2xl font-bold text-slate-600">Ask a Question</h1>
+  </div>
+  <div class="block gap-3 md:grid md:grid-cols-12 md:gap-5 mt-5 lg:px-0">
+    <div class="md:col-span-8 lg:col-span-8 bg-blue-100 rounded-lg h-fit p-4">
+      <h2 class="text-lg font-medium mb-2">Write a god question.</h2>
+      <p>You’re ready to ask a question? this form will help guide you through the process.</p>
+      <p class="font-medium my-2">Steps</p>
+      <ul class="list-disc px-8">
+        <li>Summarize your problem in a one-line title.</li>
+        <li>Describe your problem in more detail.</li>
+        <li>Describe what you tried and what you expected to happen.</li>
+        <li>You may or may not add an image screen shot of your solution</li>
+        <li>Review your question and post it to the site.</li>
+      </ul>
+    </div>
+    <div class="hidden"></div>
+  </div>
+  <div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-5 mt-8">
+    <div class="md:col-span-8 py-4">
+      <div class="">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+          <div class="flex flex-col bg-white rounded-md p-4 mb-3">
+            <label for="" class="text-[18px] text-slate-700 font-medium">Title</label>
+            <p class="text-sm text-slate-400 py-2">Be specific and imagine you’re asking a question to another person.</p>
+            {{ form.title }}
+          </div>
+          <div class="flex flex-col bg-white rounded-md p-4 mb-3">
+            <label for="" class="text-[18px] text-slate-700 font-medium">What are the details of your problem?</label>
+            <p class="text-sm text-slate-400 py-2">
+              Introduce your problem and expand on what you put in the title, describe what you tried, what you expected to happen, and what actually
+              resulted.You may provide a screenshot of your working as well.
+            </p>
+            {{ form.problem_body }}
+            <div class="py-3 flex flex-row gap-3 items-center">
+              <label for=" class="cursor-pointer"
+                ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-8 w-8" color="#9b9b9b" fill="none">
+                  <path
+                    d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                  <circle cx="16.5" cy="7.5" r="1.5" stroke="currentColor" stroke-width="1.5" />
+                  <path
+                    d="M16 22C15.3805 19.7749 13.9345 17.7821 11.8765 16.3342C9.65761 14.7729 6.87163 13.9466 4.01569 14.0027C3.67658 14.0019 3.33776 14.0127 3 14.0351"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M13 18C14.7015 16.6733 16.5345 15.9928 18.3862 16.0001C19.4362 15.999 20.4812 16.2216 21.5 16.6617"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linejoin="round"
+                  /></svg
+              ></label>
+              {{ form.image }}
+            </div>
+            <div  class="mt-5">
+                <button type="submit" class="w-full md:w-fit bg-blue-500 text-white font-medium text-[16px] px-16 py-2.5 rounded-md">Reviewed your question ? Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="md:col-span-4 py-4">
+        <div class="bg-white rounded-md p-4  grid grid-cols-4">
+<div class="col-span-1 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-blue-600 h-10 w-10" color="#9b9b9b" fill="none">
+    <path d="M5.32171 9.6829C7.73539 5.41196 8.94222 3.27648 10.5983 2.72678C11.5093 2.42437 12.4907 2.42437 13.4017 2.72678C15.0578 3.27648 16.2646 5.41196 18.6783 9.6829C21.092 13.9538 22.2988 16.0893 21.9368 17.8293C21.7376 18.7866 21.2469 19.6548 20.535 20.3097C19.241 21.5 16.8274 21.5 12 21.5C7.17265 21.5 4.75897 21.5 3.46496 20.3097C2.75308 19.6548 2.26239 18.7866 2.06322 17.8293C1.70119 16.0893 2.90803 13.9538 5.32171 9.6829Z" stroke="currentColor" stroke-width="1.5" />
+    <path d="M11.992 16H12.001" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M12 13L12 8.99997" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg></div>
+<div class="col-span-3">
+    <h3 class="text-lg font-medium mb-2 text-slate-700">Searched your question ?</h3>
+    <p class="text-sm text-slate-500">Please make sure your question isn’t already answered before posting.</p>
+</div>
+        </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}
