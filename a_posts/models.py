@@ -16,3 +16,16 @@ class Question(models.Model):
     
     class Meta:
         ordering =['-created']
+        
+
+
+class Answer(models.Model):
+    content = models.TextField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    question_id = models.ForeignKey(Question, on_delete = models.CASCADE)
+    
+    def __str__(self):
+        return self.content
+    
+    class Meta:
+        ordering =['-created_at']

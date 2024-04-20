@@ -9,6 +9,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home_view, name="home-page"),
     path("ask_question/", question_create_view, name="ask-question"),
+    path("edit_question/<str:pk>", question_edit_view, name="edit-question"),
+    path("delete_question/<str:pk>", delete_question_view, name="delete-question"),
 ]
 
 if settings.DEBUG:
