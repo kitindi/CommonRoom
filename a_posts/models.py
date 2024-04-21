@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -10,6 +11,8 @@ class Question(models.Model):
     problem_body = models.TextField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     id =models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+   
     
     def __str__(self):
         return self.title
@@ -23,6 +26,9 @@ class Answer(models.Model):
     content = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     question_id = models.ForeignKey(Question, on_delete = models.CASCADE)
+    question_id =models.ForeignKey(Question, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    id =models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     
     def __str__(self):
         return self.content

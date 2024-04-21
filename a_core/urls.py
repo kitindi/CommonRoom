@@ -11,6 +11,7 @@ urlpatterns = [
     path("ask_question/", question_create_view, name="ask-question"),
     path("edit_question/<str:pk>", question_edit_view, name="edit-question"),
     path("delete_question/<str:pk>", delete_question_view, name="delete-question"),
+    path("reply/<str:question_id>", reply_question_view, name="reply-question"),
 ]
 
 if settings.DEBUG:

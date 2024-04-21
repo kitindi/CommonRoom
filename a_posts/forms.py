@@ -1,5 +1,5 @@
 from django import forms
-from a_posts.models import Question
+from a_posts.models import Question, Answer
 
 
 
@@ -15,5 +15,12 @@ class QuestionCreateForm(forms.ModelForm):
         }
 
 
-class AnswersForm(forms.ModelForm):
-    pass 
+class AnswerForm(forms.ModelForm):
+    reply_question = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+    class Meta:
+        model = Answer
+        fields = "__all__"
+        
+        widgets = {
+            'content': forms.Textarea(attrs={'rows':3,'Palceholder':'What is in your mind?','class':'w-full px-2.5 py-2.5 text-[12px] test-slate-600 focus:outline-none'}),
+            }

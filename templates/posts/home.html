@@ -24,9 +24,9 @@
     </div>
     <div class="col-span-3 bg-white flex items-center justify-center rounded-md p-2"><h2 class="text-sm font-semibold text-slate-600">Mathematics</h2></div>
   </div>
-  <div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-5 mt-8">
-    <div class="md:col-span-9 py-4">
-      <div class="bg-white rounded-md p-4">
+  <div class="flex flex-col-reverse md:grid md:grid-cols-12 md:gap-2 lg:gap-5 mt-8">
+    <div class="md:col-span-6 lg:col-span-9 py-4">
+      <div class="bg-white rounded-md md:py-4 md:px-2 lg:p-4">
         <div class="flex flex-col md:flex-row gap-3 items-center">
           <form action="" class="w-full">
             <div class="flex flex-col md:flex-row gap-2 items-center w-full">
@@ -61,7 +61,7 @@
           </form>
           <a
             href="{% url 'ask-question' %}"
-            class="hidden md:inline-flex bg-blue-600 px-2 py-3 text-white font-semibold w-full md:w-[200px] rounded-md flex items-center justify-center gap-2"
+            class="hidden md:inline-flex bg-blue-600 px-2 py-3 text-white text-sm font-semibold w-full md:w-[200px] rounded-md flex items-center justify-center gap-2"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-white w-6 h-6" color="#9b9b9b" fill="none">
               <path
@@ -133,77 +133,22 @@
           </a>
         </div>
       </div>
-      <div class="mt-6">
+      <div class="mt-6 h-fit">
         <ul>
-          {% for question in questions %}
-          <li class="bg-white rounded-md p-4 mb-8" x-data="{ show: false }">
-            <div class="grid grid-cols-12">
-              <div class="col-span-1 flex justify-center py-2 mr-2">
+          {% if questions.count > 0 %} {% for question in questions %}
+          <li class="bg-white rounded-md px-1 py-4 lg:p-4 mb-8 h-fit" x-data="{ show: false }">
+            <div class="grid grid-cols-12 h-fit">
+              <div class="col-span-2 md:col-span-1 flex justify-center py-2 mr-2">
                 <img
                   class="w-8 h-8 md:w-10 md:h-10 rounded-full"
                   src="https://images.generated.photos/63lil6S3pxb21QHsFPxJpmMIMyHYVdmprmiK-48AuDA/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NDIzNDQyLmpwZw.jpg"
                   alt=""
                 />
               </div>
-              <div class="col-span-11 py-2" x-data="{ open: false }">
-                <h3 class="text-[20px] text-slate-600 font-semibold mb-2">{{ question.title }}</h3>
-                <p class="text-slate-600 text-[16px] pb-3 pt-1">{{ question.problem_body }}</p>
-                <div class="{% if question.image %} h-fit md:h-[300px] w-full {% else %} hidden {% endif %}">
-                  {% if question.image %}
-                  <img class="object-contain w-full h-auto sm:h-full rounded-md" src="{{ question.image.url }}" alt="" />
-                  <p></p>
-                  {% endif %}
-                </div>
-                <div class="py-2 mt-3 flex items-center justify-between gap-8">
-                  <div class="flex items-center gap-8">
-                    <a href="" class="flex items-center gap-3 text-sm"
-                      ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-red-600" color="#9b9b9b" fill="none">
-                        <path
-                          d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                        /></svg
-                      >3 Likes</a
-                    >
-                    <p class="text-[16px] md:text-[12px] font-medium text-slate-500 flex gap-2 items-center cursor-pointer" x-on:click="show = !show">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6" color="#9b9b9b" fill="none">
-                        <path d="M7.5 12H13.5M7.5 8H10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                          d="M8.5 20C9.55038 20.8697 10.8145 21.4238 12.2635 21.5188C13.4052 21.5937 14.5971 21.5936 15.7365 21.5188C16.1288 21.4931 16.5565 21.4007 16.9248 21.251C17.3345 21.0845 17.5395 21.0012 17.6437 21.0138C17.7478 21.0264 17.8989 21.1364 18.2011 21.3563C18.7339 21.744 19.4051 22.0225 20.4005 21.9986C20.9038 21.9865 21.1555 21.9804 21.2681 21.7909C21.3808 21.6013 21.2405 21.3389 20.9598 20.8141C20.5706 20.0862 20.324 19.2529 20.6977 18.5852C21.3413 17.6315 21.8879 16.5021 21.9678 15.2823C22.0107 14.6269 22.0107 13.9481 21.9678 13.2927C21.9146 12.4799 21.7173 11.7073 21.4012 11"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M12.345 17.4868C15.9006 17.2526 18.7328 14.4069 18.9658 10.8344C19.0114 10.1353 19.0114 9.41131 18.9658 8.71219C18.7328 5.13968 15.9006 2.29401 12.345 2.05985C11.132 1.97997 9.86553 1.98013 8.65499 2.05985C5.09943 2.29401 2.26725 5.13968 2.0342 8.71219C1.9886 9.41131 1.9886 10.1353 2.0342 10.8344C2.11908 12.1356 2.69992 13.3403 3.38372 14.3576C3.78076 15.0697 3.51873 15.9586 3.10518 16.735C2.807 17.2948 2.65791 17.5747 2.77762 17.7769C2.89732 17.9791 3.16472 17.9856 3.69951 17.9985C4.75712 18.024 5.47028 17.7269 6.03638 17.3134C6.35744 17.0788 6.51798 16.9615 6.62862 16.9481C6.73926 16.9346 6.957 17.0234 7.39241 17.2011C7.78374 17.3608 8.23812 17.4593 8.65499 17.4868C9.86553 17.5665 11.132 17.5666 12.345 17.4868Z"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                      <span> 3 answers</span>
-                    </p>
-                    <p class="flex items-center gap-2 text-sm font-medium cursor-pointer" x-on:click="open = ! open">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 text-blue-600" color="#9b9b9b" fill="none">
-                        <path
-                          d="M16.2141 4.98239L17.6158 3.58063C18.39 2.80646 19.6452 2.80646 20.4194 3.58063C21.1935 4.3548 21.1935 5.60998 20.4194 6.38415L19.0176 7.78591M16.2141 4.98239L10.9802 10.2163C9.93493 11.2616 9.41226 11.7842 9.05637 12.4211C8.70047 13.058 8.3424 14.5619 8 16C9.43809 15.6576 10.942 15.2995 11.5789 14.9436C12.2158 14.5877 12.7384 14.0651 13.7837 13.0198L19.0176 7.78591M16.2141 4.98239L19.0176 7.78591"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M21 12C21 16.2426 21 18.364 19.682 19.682C18.364 21 16.2426 21 12 21C7.75736 21 5.63604 21 4.31802 19.682C3 18.364 3 16.2426 3 12C3 7.75736 3 5.63604 4.31802 4.31802C5.63604 3 7.75736 3 12 3"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                        /></svg
-                      >Write answer
-                    </p>
-                  </div>
-                  <div class="flex items-center gap-6">
+              <div class="col-span-10 md:col-span-11 py-2" x-data="{ open: false }">
+                <h3 class="text-[14px] md:text-[16px] text-slate-600 font-semibold mb-2 flex items-center justify-between">
+                  {{ question.title }}
+                  <div class="flex flex-row items-center gap-4 md:hidden">
                     <a href="{% url 'edit-question' question.id %}" class="flex items-center gap-2 text-sm font-medium">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" color="#9b9b9b" fill="none">
                         <path
@@ -234,18 +179,140 @@
                         /></svg
                     ></a>
                   </div>
+                </h3>
+                <p class="text-slate-600 text-[14px] pb-3 pt-1">{{ question.problem_body }}</p>
+                <div class="{% if question.image %} h-fit md:h-[300px] w-full {% else %} hidden {% endif %}">
+                  {% if question.image %}
+                  <img class="object-contain w-full h-auto sm:h-full rounded-md" src="{{ question.image.url }}" alt="" />
+                  <p></p>
+                  {% endif %}
                 </div>
-                <div class="w-full bg-blue-50 h-20 mt-2 rounded-md" x-show="open">comment section here</div>
+                <div class="py-2 mt-3 flex items-center justify-between gap-8">
+                  <div class="flex items-center gap-8">
+                    <a href="" class="flex items-center gap-3 text-sm"
+                      ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-red-600" color="#9b9b9b" fill="none">
+                        <path
+                          d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        /></svg
+                      >3 Likes</a
+                    >
+                    <p class="text-[12px] md:text-[12px] font-medium text-slate-500 flex gap-2 items-center cursor-pointer" x-on:click="show = !show">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6" color="#9b9b9b" fill="none">
+                        <path d="M7.5 12H13.5M7.5 8H10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M8.5 20C9.55038 20.8697 10.8145 21.4238 12.2635 21.5188C13.4052 21.5937 14.5971 21.5936 15.7365 21.5188C16.1288 21.4931 16.5565 21.4007 16.9248 21.251C17.3345 21.0845 17.5395 21.0012 17.6437 21.0138C17.7478 21.0264 17.8989 21.1364 18.2011 21.3563C18.7339 21.744 19.4051 22.0225 20.4005 21.9986C20.9038 21.9865 21.1555 21.9804 21.2681 21.7909C21.3808 21.6013 21.2405 21.3389 20.9598 20.8141C20.5706 20.0862 20.324 19.2529 20.6977 18.5852C21.3413 17.6315 21.8879 16.5021 21.9678 15.2823C22.0107 14.6269 22.0107 13.9481 21.9678 13.2927C21.9146 12.4799 21.7173 11.7073 21.4012 11"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M12.345 17.4868C15.9006 17.2526 18.7328 14.4069 18.9658 10.8344C19.0114 10.1353 19.0114 9.41131 18.9658 8.71219C18.7328 5.13968 15.9006 2.29401 12.345 2.05985C11.132 1.97997 9.86553 1.98013 8.65499 2.05985C5.09943 2.29401 2.26725 5.13968 2.0342 8.71219C1.9886 9.41131 1.9886 10.1353 2.0342 10.8344C2.11908 12.1356 2.69992 13.3403 3.38372 14.3576C3.78076 15.0697 3.51873 15.9586 3.10518 16.735C2.807 17.2948 2.65791 17.5747 2.77762 17.7769C2.89732 17.9791 3.16472 17.9856 3.69951 17.9985C4.75712 18.024 5.47028 17.7269 6.03638 17.3134C6.35744 17.0788 6.51798 16.9615 6.62862 16.9481C6.73926 16.9346 6.957 17.0234 7.39241 17.2011C7.78374 17.3608 8.23812 17.4593 8.65499 17.4868C9.86553 17.5665 11.132 17.5666 12.345 17.4868Z"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <span> 3 answers</span>
+                    </p>
+                    <p class="flex items-center gap-2 text-[12px] font-medium cursor-pointer" x-on:click="open = ! open">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 text-blue-600" color="#9b9b9b" fill="none">
+                        <path
+                          d="M16.2141 4.98239L17.6158 3.58063C18.39 2.80646 19.6452 2.80646 20.4194 3.58063C21.1935 4.3548 21.1935 5.60998 20.4194 6.38415L19.0176 7.78591M16.2141 4.98239L10.9802 10.2163C9.93493 11.2616 9.41226 11.7842 9.05637 12.4211C8.70047 13.058 8.3424 14.5619 8 16C9.43809 15.6576 10.942 15.2995 11.5789 14.9436C12.2158 14.5877 12.7384 14.0651 13.7837 13.0198L19.0176 7.78591M16.2141 4.98239L19.0176 7.78591"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M21 12C21 16.2426 21 18.364 19.682 19.682C18.364 21 16.2426 21 12 21C7.75736 21 5.63604 21 4.31802 19.682C3 18.364 3 16.2426 3 12C3 7.75736 3 5.63604 4.31802 4.31802C5.63604 3 7.75736 3 12 3"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        /></svg
+                      >Write answer
+                    </p>
+                  </div>
+                  <div class="hidden md:inline-flex items-center gap-6">
+                    {% if request.user.id == question.user.id %}
+                    <a href="{% url 'edit-question' question.id %}" class="flex items-center gap-2 text-[12px] font-medium">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" color="#9b9b9b" fill="none">
+                        <path
+                          d="M14.0737 3.88545C14.8189 3.07808 15.1915 2.6744 15.5874 2.43893C16.5427 1.87076 17.7191 1.85309 18.6904 2.39232C19.0929 2.6158 19.4769 3.00812 20.245 3.79276C21.0131 4.5774 21.3972 4.96972 21.6159 5.38093C22.1438 6.37312 22.1265 7.57479 21.5703 8.5507C21.3398 8.95516 20.9446 9.33578 20.1543 10.097L10.7506 19.1543C9.25288 20.5969 8.504 21.3182 7.56806 21.6837C6.63212 22.0493 5.6032 22.0224 3.54536 21.9686L3.26538 21.9613C2.63891 21.9449 2.32567 21.9367 2.14359 21.73C1.9615 21.5234 1.98636 21.2043 2.03608 20.5662L2.06308 20.2197C2.20301 18.4235 2.27297 17.5255 2.62371 16.7182C2.97444 15.9109 3.57944 15.2555 4.78943 13.9445L14.0737 3.88545Z"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                        />
+                        <path d="M13 4L20 11" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                        <path d="M14 22L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg
+                      >Edit</a
+                    >
+                    <a href="{% url 'delete-question'  question.id %}" class="flex items-center gap-2 text-sm font-medium">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 hover:text-red-500" color="#9b9b9b" fill="none">
+                        <path
+                          d="M19.5 5.5L18.8803 15.5251C18.7219 18.0864 18.6428 19.3671 18.0008 20.2879C17.6833 20.7431 17.2747 21.1273 16.8007 21.416C15.8421 22 14.559 22 11.9927 22C9.42312 22 8.1383 22 7.17905 21.4149C6.7048 21.1257 6.296 20.7408 5.97868 20.2848C5.33688 19.3626 5.25945 18.0801 5.10461 15.5152L4.5 5.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        />
+                        <path d="M9 11.7349H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M10.5 15.6543H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        <path
+                          d="M3 5.5H21M16.0555 5.5L15.3729 4.09173C14.9194 3.15626 14.6926 2.68852 14.3015 2.39681C14.2148 2.3321 14.1229 2.27454 14.0268 2.2247C13.5937 2 13.0739 2 12.0343 2C10.9686 2 10.4358 2 9.99549 2.23412C9.89791 2.28601 9.80479 2.3459 9.7171 2.41317C9.32145 2.7167 9.10044 3.20155 8.65842 4.17126L8.05273 5.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        /></svg
+                    ></a>
+                    {% else %}
+                    <p></p>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="w-full h-fit mt-2 rounded-md" x-show="open">
+                  <form action="{% url 'reply-question' question.id %}" method="POST" class="w-full h-full px-4">
+                    {% csrf_token %}
+                    <div class="w-full border border-gray-400 rounded-md flex flex-col p-2">
+                      {{ answer_form.content }}
+                      <div class="flex justify-end mt-2 gap-3">
+                        <p class="cursor-pointer inline-block border border-gray-500 text-black text-[12px] px-8 py-2 rounded-md" x-on:click="open = ! open">
+                          Cancel
+                        </p>
+                        <button type="submit" class="bg-black text-white text-[12px] px-8 py-2 rounded-md">Answer</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
                 <div class="w-full h-20 mt-2 rounded-md" x-show="show">list of comments section here</div>
               </div>
             </div>
           </li>
-          {% endfor %}
+          {% endfor %} {% else %}
+          <div class="text-center py-4">
+            <p class="flex items-center justify-center gap-1">
+              <span
+                ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-amber-400 h-6 w-6" color="#9b9b9b" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path
+                    d="M8 15C8.91212 16.2144 10.3643 17 12 17C13.6357 17 15.0879 16.2144 16 15"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path d="M8.00897 9L8 9M16 9L15.991 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span
+              >! No questions yet, start asking
+            </p>
+          </div>
+          {% endif %}
         </ul>
       </div>
     </div>
-    <div class="md:col-span-3">
-      <div class="mt-5 bg-white p-4">
+    <div class="md:col-span-4 lg:col-span-3">
+      <div class="mt-5 bg-white px-1 py-4 md:p-4">
         <h3 class="font-semibold tex-sm text-[16px] text-slate-600">Top Contributors</h3>
         <ul>
           <li class="my-4 py-1">
@@ -285,7 +352,7 @@
         </ul>
       </div>
 
-      <div class="mt-5 bg-white p-4">
+      <div class="mt-5 bg-white px-1 py-4 md:p-4">
         <h3 class="font-semibold tex-sm text-[16px] mt-5 text-slate-600">Top Questions</h3>
         <ul>
           <li class="my-4 py-1">
